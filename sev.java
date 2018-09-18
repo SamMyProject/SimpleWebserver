@@ -1,4 +1,4 @@
-package fuck;
+package webServer;
 
 import java.io.*;
 import java.util.*;
@@ -23,7 +23,7 @@ public class sev {
 	}
 
 	void output(DataOutputStream out, String str) throws Exception {
-		out.writeBytes(str + "\r\n");// ¼g¨ìsocket¸Ì­±
+		out.writeBytes(str + "\r\n");// å¯«åˆ°socketè£¡é¢
 		System.out.println(str);
 		out.flush();
 	}
@@ -54,8 +54,8 @@ public class sev {
 				Socket socket = serverSocket.accept();
 				System.out.println("con ok!");
 
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream()); // ¨ú±o¶Ç°e¸ê®Æªº¿é¥XÀÉ¡C
-				DataInputStream in = new DataInputStream(socket.getInputStream()); // ¨ú±o±µ¦¬¸ê®Æªº¿é¤JÀÉ¡C
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream()); // å–å¾—å‚³é€è³‡æ–™çš„è¼¸å‡ºæª”ã€‚
+				DataInputStream in = new DataInputStream(socket.getInputStream()); // å–å¾—æ¥æ”¶è³‡æ–™çš„è¼¸å…¥æª”ã€‚
 				String request = "";
 
 				fullPath = "login.html";
@@ -71,8 +71,8 @@ public class sev {
 				System.out.println(request);
 
 				if (request.indexOf("HTTP/1.") < 0) {
-					output(out, "HTTP/1.1 505 error"); // ¶Ç¦^¦¨¥\°T®§¡C
-					output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+					output(out, "HTTP/1.1 505 error"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+					output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 
 					output(out, "");
 				} else {
@@ -84,22 +84,22 @@ public class sev {
 							fullPath = innerText(request, "GET /", "HTTP/").trim();
 
 						// System.out.print(fullPath+"l");
-						file = new File(fullPath);// ¦b¦¹³B¥´¶}index1.html(¶}±ÒÀÉ®×)
+						file = new File(fullPath);// åœ¨æ­¤è™•æ‰“é–‹index1.html(é–‹å•Ÿæª”æ¡ˆ)
 						// System.out.println(fullPath);
 						if (!file.exists()) {
-							output(out, "HTTP/1.1 404 Error"); // ¶Ç¦^¦¨¥\°T®§¡C
-							output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-							// ¶Ç¦^ÀÉ®×Ãş«¬¡C
+							output(out, "HTTP/1.1 404 Error"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+							output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+							// å‚³å›æª”æ¡ˆé¡å‹ã€‚
 							output(out, "");
 						} else {
 							if (fullPath.indexOf("yy.html") >= 0) {
-								output(out, "HTTP/1.1 301 Moved Permanently"); // ¶Ç¦^¦¨¥\°T®§¡C
-								output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+								output(out, "HTTP/1.1 301 Moved Permanently"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+								output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 								output(out, "");
 							} else {
-								output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-								output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-								output(out, "Content-Length: " + file.length()); // ¶Ç¦^¤º®eªø«×¡C
+								output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+								output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+								output(out, "Content-Length: " + file.length()); // å‚³å›å…§å®¹é•·åº¦ã€‚
 								output(out, "Server: LAB312");
 								output(out, "");
 							} // else
@@ -117,17 +117,17 @@ public class sev {
 						System.out.println(request);
 						if (!innerText(request, "HEAD ", "HTTP/").trim().equals("/"))
 							fullPath = innerText(request, "HEAD /", "HTTP/").trim();
-						file = new File(fullPath);// ¦b¦¹³B¥´¶}index1.html(¶}±ÒÀÉ®×)
+						file = new File(fullPath);// åœ¨æ­¤è™•æ‰“é–‹index1.html(é–‹å•Ÿæª”æ¡ˆ)
 						if (!file.exists())
 							throw new Exception("File not found !");
 						if (fullPath.indexOf("yy.html") >= 0) {
-							output(out, "HTTP/1.1 301 Moved Permanently"); // ¶Ç¦^¦¨¥\°T®§¡C
-							output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+							output(out, "HTTP/1.1 301 Moved Permanently"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+							output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 							output(out, "");
 						} else {
-							output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-							output(out, "Content-Type: "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-							output(out, "Content-Length: " + file.length()); // ¶Ç¦^¤º®eªø«×¡C
+							output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+							output(out, "Content-Type: "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+							output(out, "Content-Length: " + file.length()); // å‚³å›å…§å®¹é•·åº¦ã€‚
 							output(out, "");
 						} // else
 					} // else if
@@ -150,17 +150,17 @@ public class sev {
 							if (request.indexOf("Cookie") >= 0) {
 								if (!user.equals("12345") || !password.equals("125")) {
 									output(out, "refresh:0;URL=text.html");
-									output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-									output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-									output(out, "Content-Length: "); // ¶Ç¦^¤º®eªø«×
+									output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+									output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+									output(out, "Content-Length: "); // å‚³å›å…§å®¹é•·åº¦
 									output(out, "Server: LAB312");
 									output(out, "");
 									h = 1;
 								} // if
 								else {
-									output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-									output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-									output(out, "Content-Length: "); // ¶Ç¦^¤º®eªø«×¡C
+									output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+									output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+									output(out, "Content-Length: "); // å‚³å›å…§å®¹é•·åº¦ã€‚
 									output(out, "refresh:0;URL=2.html");
 									output(out, "Server: LAB312");
 									output(out, "");
@@ -168,9 +168,9 @@ public class sev {
 							} // if
 							else {
 								if (user.equals("12345") && password.equals("125")) {
-									output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-									output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-									output(out, "Content-Length: "); // ¶Ç¦^¤º®eªø«×¡C
+									output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+									output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+									output(out, "Content-Length: "); // å‚³å›å…§å®¹é•·åº¦ã€‚
 									output(out, "Set-Cookie: user=12345;Max-Age=600");
 									output(out, "Set-Cookie: password=125;Max-Age=600");
 									output(out, "refresh:0;URL=2.html");
@@ -180,15 +180,15 @@ public class sev {
 								} // if
 								else {
 									output(out, "refresh:0;URL=login.html");
-									output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
+									output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
 									output(out, "Server: LAB312");
 									output(out, "");
 								} // else
 							} // else
 						} // if
 						else {
-							output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-							output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+							output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+							output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 							output(out, "Server: LAB312");
 							output(out, "");
 
@@ -246,25 +246,25 @@ public class sev {
 						System.out.print(getin);
 						fw.write(getin + "\r\n");
 						fw.close();
-						output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-						output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-						output(out, "Content-Length: " + file.length()); // ¶Ç¦^¤º®eªø«×¡C
+						output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+						output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+						output(out, "Content-Length: " + file.length()); // å‚³å›å…§å®¹é•·åº¦ã€‚
 						output(out, "Server: LAB312");
 						output(out, "");
 						// if (fullPath.indexOf("yy.html") >= 0) {
 						// output(out, "HTTP/1.1 301 Moved Permanently"); //
-						// ¶Ç¦^¦¨¥\°T®§¡C
-						// output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+						// å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+						// output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 						// // output(out, "Location:http://youtube.com"); //
-						// // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+						// // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 						// output(out, "");
 						// // throw new Exception("HTTP/1.1 301 Moved
 						// // Permanently");
 						// } else {
-						// output(out, "HTTP/1.1 200 OK"); // ¶Ç¦^¦¨¥\°T®§¡C
-						// output(out, "Content-Type: text/html"); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+						// output(out, "HTTP/1.1 200 OK"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+						// output(out, "Content-Type: text/html"); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 						// output(out, "Content-Length: " + file.length()); //
-						// ¶Ç¦^¤º®eªø«×¡C
+						// å‚³å›å…§å®¹é•·åº¦ã€‚
 						// output(out, "Server: LAB312");
 						// output(out, "");
 						// } // else
@@ -282,16 +282,16 @@ public class sev {
 						if (!innerText(request, "DELETE ", "HTTP/").trim().equals("/"))
 							fullPath = innerText(request, "DELETE /", "HTTP/").trim();
 						try {
-							file = new File(fullPath);// ¦b¦¹³B¥´¶}index1.html(¶}±ÒÀÉ®×)
+							file = new File(fullPath);// åœ¨æ­¤è™•æ‰“é–‹index1.html(é–‹å•Ÿæª”æ¡ˆ)
 							if (!file.exists()) {
-								output(out, "HTTP/1.1 404 Error"); // ¶Ç¦^¦¨¥\°T®§¡C
-								output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
+								output(out, "HTTP/1.1 404 Error"); // å‚³å›æˆåŠŸè¨Šæ¯ã€‚
+								output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
 								output(out, "");
 							} else {
 								if (file.delete()) {
 									output(out, "HTTP/1.1 204 No Content!");
-									output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-									output(out, "Content-Length: " + 0); // ¶Ç¦^¤º®eªø«×¡C
+									output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+									output(out, "Content-Length: " + 0); // å‚³å›å…§å®¹é•·åº¦ã€‚
 									output(out, "Server: LAB312");
 									output(out, "");
 								}
@@ -305,8 +305,8 @@ public class sev {
 					else {
 
 						output(out, "HTTP/1.1 400 Bad Request!");
-						output(out, "Content-Type:text/html "); // ¶Ç¦^ÀÉ®×Ãş«¬¡C
-						output(out, "Content-Length: "); // ¶Ç¦^¤º®eªø«×¡C
+						output(out, "Content-Type:text/html "); // å‚³å›æª”æ¡ˆé¡å‹ã€‚
+						output(out, "Content-Length: "); // å‚³å›å…§å®¹é•·åº¦ã€‚
 						output(out, "Server: LAB312");
 						output(out, "");
 
